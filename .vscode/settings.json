@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "lcd1602.h": "c",
+        "REGX52.H": "cpp",
+        "keypad.h": "c",
+        "event.h": "c",
+        "timer_manage.h": "c",
+        "timer.h": "c",
+        "display_manage.h": "c",
+        "delay.h": "c",
+        "alarm_manage.h": "c",
+        "buzzer.h": "c",
+        "stdio.h": "c",
+        "number_input.h": "c",
+        "DS3231.C": "cpp",
+        "24C02.C": "cpp"
+    }
+}
