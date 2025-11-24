@@ -22,7 +22,7 @@ typedef enum {
 
 // 函数声明
 void Alarm_Manage(Event* e);
-void Alarm_Blink_Update(void);  // 添加这行声明
+void Alarm_Blink_Update(void); 
 AlarmState Alarm_GetState(void);
 unsigned char Alarm_GetHour(void);
 unsigned char Alarm_GetMin(void);

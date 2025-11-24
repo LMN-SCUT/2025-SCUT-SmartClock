@@ -2,8 +2,8 @@
 #include "alarm_manage.h"
 #include "event.h"
 #include "display_manage.h"
-#include "buzzer.h"  // 确保包含蜂鸣器头文件
-#include "AT24C32.h" // 引入头文件
+#include "buzzer.h"  
+#include "AT24C32.h" 
 
 
 
@@ -171,7 +171,7 @@ void Alarm_Manage(Event* e) {
 }
 
 
-// 新增函数：放在主循环调用
+//放在主循环调用
 void Alarm_Loop_Update(void) {
     // 只有响铃时才需要高频闪烁
     if (alarm_ringing) {

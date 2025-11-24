@@ -3,18 +3,21 @@
 
 #include <REGX52.H>
 
-// æŒ‰é”®åŠŸèƒ½å®šä¹‰ - ä¸äº‹ä»¶ç³»ç»ŸåŒ¹é…
+// ¼üÖµ¶¨Òå
 #define KEY_NONE      0xFF
+#define KEY_MODE      16    // Ä£Ê½ÇĞ»»¼ü
+#define KEY_SET       17    // ÉèÖÃ¼ü®¤
+#define KEY_INC       18    // Ôö¼Ó¼ü
+#define KEY_DEC       19    // ¼õÉÙ¼ü
+#define KEY_ENTER     20    // È·ÈÏ¼ü®¤
+#define KEY_CANCEL    21    // È¡Ïû¼ü
 
-// åŠŸèƒ½é”®å®šä¹‰
-#define KEY_MODE      16    // æ¨¡å¼åˆ‡æ¢
-#define KEY_SET       17    // è®¾ç½®ç¡®è®¤
-#define KEY_INC       18    // å¢åŠ 
-#define KEY_DEC       19    // å‡å°‘
-#define KEY_ENTER     20    // ç¡®è®¤
-#define KEY_CANCEL    21    // å–æ¶ˆ
-
-// å‡½æ•°å£°æ˜
+// º¯ÊıÉùÃ÷
+/**
+ * @brief ¼üÅÌÉ¨Ãèº¯Êı
+ * @return ·µ»Ø°´¼üµÄÔ­Ê¼¼üÖµ£¨0-15¶ÔÓ¦4x4¾ØÕóÎ»ÖÃ£©
+ * @note ¸Ãº¯Êı»á½øĞĞ°´¼üÏû¶¶´¦Àí
+ */
 unsigned char Key_Scan(void);
 unsigned char Key_GetFunction(void);
 void Key_ProcessEvents(void);

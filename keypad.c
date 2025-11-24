@@ -2,7 +2,7 @@
 #include "event.h"
 #include "delay.h"
 
-// 键值映射表（保持不变）
+// 键值映射表
 code const unsigned char key_function_map[16] = {
     '7', '8', '9', KEY_MODE,  // 第一行: 极速模式7, 8, 9, 模式
     '4', '5', '6', KEY_SET,   // 第二行: 4, 5, 6, 设置
@@ -59,7 +59,7 @@ unsigned char Key_GetFunction(void)
     return key_function_map[raw_key];
 }
 
-// 处理键盘事件（修复后的版本）
+// 处理键盘事件
 void Key_ProcessEvents(void)
 {
     unsigned char key_func = Key_GetFunction();

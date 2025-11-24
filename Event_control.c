@@ -5,7 +5,7 @@
 #include "timer.h"
 #include "alarm_manage.h"  
 #include "number_input.h"
-#include "menu_manage.h"  // 添加菜单管理头文件
+#include "menu_manage.h"  
 #include "stopwatch_manage.h"
 
 #define MAX_EVENTS 10
@@ -46,12 +46,12 @@ void Event_Process(void) {
         }
         
         // 分发事件到各模块
-        Display_manage(&e);
-        Time_Manage(&e);        // 注意：函数名大小写一致，原代码是 time_manage，建议统一为 Time_manage
-        Alarm_Manage(&e);
-        Number_Input_Manage(&e);
-        Menu_Manage(&e);        // 新增菜单管理模块
-		Stopwatch_Manage(&e); // 新增：秒表管理
+        Display_manage(&e);	   //显示模块
+        Time_Manage(&e);        //走时管理
+        Alarm_Manage(&e);		//闹钟管理
+        Number_Input_Manage(&e);   //数字输入管理
+        Menu_Manage(&e);        // 菜单管理模块
+		Stopwatch_Manage(&e); // 秒表管理
         
         // 模式切换后的初始化处理
         if (e.type == EVENT_SYS_MODE_CHANGE) {
@@ -65,7 +65,7 @@ void Event_Process(void) {
     }
 }
 
-SystemMode Event_GetCurrentMode(void) {
+SystemMode Event_GetCurrentMode(void) {			//获取当前模式的辅助函数
     return current_mode;
 }
 

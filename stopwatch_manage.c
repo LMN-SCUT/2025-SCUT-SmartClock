@@ -37,7 +37,7 @@ void Stopwatch_Manage(Event* e) {
             }
             break;
             
-        // 新增：处理开始/暂停切换事件
+        // 处理开始/暂停切换事件
         case EVENT_STOPWATCH_TOGGLE:
             if(sw_state == STOPWATCH_IDLE || sw_state == STOPWATCH_PAUSED) {
                 // 如果当前是空闲或暂停状态，则开始运行

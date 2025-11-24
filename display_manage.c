@@ -6,7 +6,7 @@
 #include "buzzer.h"
 #include "number_input.h"
 #include "menu_manage.h"
-#include "stopwatch_manage.h"  // 确保包含秒表管理头文件
+#include "stopwatch_manage.h"  
 #include <stdio.h>
 
 // 显示缓冲
@@ -122,7 +122,7 @@ void Display_manage(Event* e) {
                 }
                 LCD_ShowString(2, 1, input_display);
             } else if(sys_mode == SYS_MODE_STOPWATCH) {
-                // 新增：秒表模式显示处理
+                // 秒表模式显示处理
                 unsigned int total_ms = Stopwatch_GetTimeMs();
                 unsigned char minutes = total_ms / 60000;
                 unsigned char seconds = (total_ms % 60000) / 1000;
