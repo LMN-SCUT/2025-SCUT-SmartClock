@@ -5,7 +5,7 @@
 #include "buzzer.h"  
 #include "AT24C32.h" 
 
-
+sbit ALARM_LED = P2^4;//定义LED灯地址
 
 // 闹钟时间存储（使用XDATA节省内存）
 static xdata unsigned char alarm_hours = 7;    // 默认闹钟时间7:00
@@ -65,6 +65,7 @@ static void Start_Alarm_Ring(void) {
     alarm_ringing = 1;
     Buzzer_SetMode(BUZZER_ALARM);  // 设置急促报警声
     Event_Publish(EVENT_ALARM_START, 0, SYS_MODE_CLOCK);
+	    ALARM_LED = 0; 	//开灯
 }
 
 static void Stop_Alarm_Ring(void) {
@@ -72,6 +73,7 @@ static void Stop_Alarm_Ring(void) {
     alarm_state = ALARM_OFF;  // 关闭闹钟
     Buzzer_SetMode(BUZZER_OFF);    // 关闭蜂鸣器
     Event_Publish(EVENT_ALARM_STOP, 0, SYS_MODE_CLOCK);
+	 ALARM_LED = 1;  //关灯
 }
 
 // 闹钟管理主函数
@@ -179,6 +181,7 @@ void Alarm_Loop_Update(void) {
         if (flash_counter >= 50) { // 假设主循环10ms一次，这里500ms闪烁
             flash_counter = 0;
             flash_state = !flash_state;
+			ALARM_LED = !ALARM_LED;   //LED闪烁
             // 直接发布闪烁事件，让Display去处理显示
             Event_Publish(EVENT_DISPLAY_FLSAH, flash_state, SYS_MODE_CLOCK);
         }

@@ -13,6 +13,7 @@
         "stdio.h": "c",
         "number_input.h": "c",
         "DS3231.C": "cpp",
-        "24C02.C": "cpp"
+        "24C02.C": "cpp",
+        "menu_manage.h": "c"
     }
 }

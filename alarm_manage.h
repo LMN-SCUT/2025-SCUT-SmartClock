@@ -4,6 +4,8 @@
 #include "event.h"
 #include "timer_manage.h"
 
+
+
 // EEPROM ¥Ê¥¢µÿ÷∑∑÷≈‰
 #define ADDR_ALARM_HOUR   0x01
 #define ADDR_ALARM_MIN    0x02
