@@ -506,6 +506,16 @@
               <FileType>5</FileType>
               <FilePath>.\AT24C32.H</FilePath>
             </File>
+            <File>
+              <FileName>watch_dog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\watch_dog.c</FilePath>
+            </File>
+            <File>
+              <FileName>watch_dog.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\watch_dog.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
