@@ -49,17 +49,17 @@ void DS3231_SetTime(unsigned char h, unsigned char m, unsigned char s) {
 }
 
 // 读取 DS3231 时间
-void DS3231_ReadTime(void) {
+bit DS3231_ReadTime(void) {
     I2C_Start();
     I2C_SendByte(DS3231_ADDRESS_WRITE); // 写地址
-    if (I2C_ReceiveAck()) { I2C_Stop(); return; }
+    if (I2C_ReceiveAck()) { I2C_Stop(); return 0; }
     
     I2C_SendByte(0x00); // 设置指针到 0x00 (秒)
-    I2C_ReceiveAck();
+	if (I2C_ReceiveAck()) { I2C_Stop(); return 0; }
     
     I2C_Start(); // 重复起始信号 (Restart)
     I2C_SendByte(DS3231_ADDRESS_READ);  // 读地址
-    if (I2C_ReceiveAck()) { I2C_Stop(); return; }
+    if (I2C_ReceiveAck()) { I2C_Stop(); return 0; }
     
     // 读秒 (ACK)
     ds_sec = BCD_To_Decimal(I2C_ReceiveByte());
@@ -74,4 +74,5 @@ void DS3231_ReadTime(void) {
     I2C_SendAck(1); // 发送NACK，告诉从机读完了
     
     I2C_Stop();
+	return 1;
 }

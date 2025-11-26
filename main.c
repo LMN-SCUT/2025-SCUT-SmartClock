@@ -16,6 +16,8 @@
 
 sbit ALARM_LED = P2^4;//定义LED灯地址
 
+unsigned char blink_interval = 500;
+
 void main() {
     // 傻逼C89标准
 	static unsigned long last_blink_time = 0;  //闪烁计时
@@ -56,7 +58,7 @@ void main() {
 		Buzzer_Update();
         
         // 闪烁更新
-        if (Timer_GetMilliseconds() - last_blink_time >= 500) { // 精确的500ms
+        if (Timer_GetMilliseconds() - last_blink_time >= blink_interval) { // 精确的500ms
             last_blink_time = Timer_GetMilliseconds();
             
             if(Event_GetCurrentMode() == SYS_MODE_TIME_SET) {

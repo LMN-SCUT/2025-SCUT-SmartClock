@@ -3,7 +3,7 @@
 
 // 函数声明
 void DS3231_Init(void);
-void DS3231_ReadTime(void);
+bit DS3231_ReadTime(void);
 void DS3231_SetTime(unsigned char h, unsigned char m, unsigned char s);
 
 // 这些变量存储从DS3231读回来的最新时间

@@ -48,11 +48,18 @@ static void Adjust_Selected_Unit(int delta) {
 static void Time_Tick(void) {
 	   static unsigned char last_min = 60;
 	   static unsigned char last_hour = 25;		//傻逼C89标准，害我查了半天
-    // 1. 从硬件读取最新时间
-    DS3231_ReadTime();
+	   unsigned char i;
+   	   bit read_success = 0;
+    // 1. 从硬件读取最新时间	 
+	 for(i=0 ; i<3 ; i++) //读取超时重试
+	 if(DS3231_ReadTime()==1){
+	 read_success = 1;
+	 break;
+	 }
     
     // 2. 更新内部变量 (hours, minutes, seconds 是 timer_manage.c 里的静态变量) 
     // 检查是否发生变化，减少不必要的事件发布（虽然每秒肯定变）
+	if (read_success){
     seconds = ds_sec;
     minutes = ds_min;
     hours = ds_hour;
@@ -73,7 +80,9 @@ static void Time_Tick(void) {
             Event_Publish(EVENT_TIME_HOUR_UPDATED, hours, Event_GetCurrentMode());
         }
     }
+  }
 }
+
 
 // 时间设置状态完全复位
 static void Time_Reset_Setup_State(void) {
