@@ -29,7 +29,6 @@ AlarmState Alarm_GetState(void);
 unsigned char Alarm_GetHour(void);
 unsigned char Alarm_GetMin(void);
 unsigned char Alarm_GetSec(void);
-void Alarm_Loop_Update(void);
 void Alarm_Read_From_EEPROM(void);
 bit Alarm_IsRinging(void);
 
