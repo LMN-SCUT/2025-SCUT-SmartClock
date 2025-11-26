@@ -67,7 +67,7 @@ typedef struct {
 } Event;
 
 // 函数声明
-void Event_Publish(EventType type, int dat, SystemMode mode);	
+void Event_Publish(EventType type, int dat, SystemMode mode)reentrant;//利用重入函数避免跑飞	
 void Event_Process(void);
 SystemMode Event_GetCurrentMode(void);
 

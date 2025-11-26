@@ -4,12 +4,14 @@
 #include "LCD1602.h"
 
 // 菜单选项定义（可根据需要扩展）
+// menu_manage.c
 code const char* menu_options[] = {
-    "1.Time Set    ",  // 选项1: 时间设置
-    "2.Alarm Set   ",  // 选项2: 闹钟设置
-    "3.Stopwatch   ",  // 选项3: 秒表模式
-    "4.Num Input   ",  // 选项4: 数字输入
-    "5.Future Mode "   // 选项5: 预留未来模式
+    // 【修改】手动补齐空格到 16 个字符
+    "1.Time Set      ", 
+    "2.Alarm Set     ",
+    "3.Stopwatch     ",
+    "4.Num Input     ",
+    "5.Future Mode   "
 };
 
 void Menu_ShowOptions(void) {

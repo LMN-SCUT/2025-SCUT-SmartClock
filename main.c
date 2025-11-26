@@ -14,6 +14,8 @@
 #include  "number_input.h"
 #include  "stopwatch_manage.h"
 
+sbit ALARM_LED = P2^4;//定义LED灯地址
+
 void main() {
     // 傻逼C89标准
 	static unsigned long last_blink_time = 0;  //闪烁计时
@@ -52,7 +54,6 @@ void main() {
         // 处理系统事件
         Event_Process();
 		Buzzer_Update();
-		Alarm_Loop_Update();
         
         // 闪烁更新
         if (Timer_GetMilliseconds() - last_blink_time >= 500) { // 精确的500ms
@@ -64,6 +65,13 @@ void main() {
             if(Event_GetCurrentMode() == SYS_MODE_ALARM_SET) {
                 Alarm_Blink_Update();
             }
+			 if (Alarm_IsRinging()) {
+            
+             ALARM_LED = !ALARM_LED; 
+             
+             // 顺便让屏幕也跟着闪（全屏闪烁事件）
+             Event_Publish(EVENT_DISPLAY_FLSAH, ALARM_LED, SYS_MODE_CLOCK);
+        }
         }
         
     }

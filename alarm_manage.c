@@ -173,20 +173,6 @@ void Alarm_Manage(Event* e) {
 }
 
 
-//放在主循环调用
-void Alarm_Loop_Update(void) {
-    // 只有响铃时才需要高频闪烁
-    if (alarm_ringing) {
-        flash_counter++;
-        if (flash_counter >= 50) { // 假设主循环10ms一次，这里500ms闪烁
-            flash_counter = 0;
-            flash_state = !flash_state;
-			ALARM_LED = !ALARM_LED;   //LED闪烁
-            // 直接发布闪烁事件，让Display去处理显示
-            Event_Publish(EVENT_DISPLAY_FLSAH, flash_state, SYS_MODE_CLOCK);
-        }
-    }
-}
 void Alarm_Read_From_EEPROM(void) {
     // 检查是否是第一次运行（检查魔术字）
     unsigned char magic = AT24C32_ReadByte(MEM_MAGIC_ADDR);
@@ -211,21 +197,14 @@ void Alarm_Read_From_EEPROM(void) {
         alarm_state = ALARM_OFF;
     }
 }
+
+bit Alarm_IsRinging(void) {
+    return alarm_ringing;
+}
 // 闹钟设置模式下的数字闪烁逻辑
 void Alarm_Blink_Update(void) {
-    // 只有在“闹钟设置模式”下才运行
-    if (Event_GetCurrentMode() == SYS_MODE_ALARM_SET) {
-        alarm_blink_counter++;
-        // 假设主循环约10ms调用一次，这里计数50次 = 500ms
-        if (alarm_blink_counter >= 50) {
-            alarm_blink_counter = 0;
-            alarm_blink_state = !alarm_blink_state;
-            // 发布闪烁事件，通知 Display 模块刷新屏幕
-            Event_Publish(EVENT_DISPLAY_BLINK, alarm_blink_state, SYS_MODE_ALARM_SET);
+alarm_blink_state = !alarm_blink_state;
+// 发布闪烁事件，通知 Display 模块刷新屏幕
+Event_Publish(EVENT_DISPLAY_BLINK, alarm_blink_state, SYS_MODE_ALARM_SET);
         }
-    } else {
-        // 退出模式时重置，防止下次进来时状态不对（可选）
-        alarm_blink_counter = 0;
-        alarm_blink_state = 0;
-    }
-}
+

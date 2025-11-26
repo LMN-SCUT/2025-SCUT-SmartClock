@@ -159,14 +159,8 @@ void Time_Manage(Event* e) {
 }
 
 // 闪烁更新函数（需要在主循环中定期调用）
-void Time_Blink_Update(void) {
-    // 只有在时间设置模式下才需要闪烁
-    if(Event_GetCurrentMode() == SYS_MODE_TIME_SET) {
-        blink_counter++;
-        if(blink_counter >= 5) { // 每500ms切换一次闪烁状态
-            blink_counter = 0;
+void Time_Blink_Update(void) {  
             global_blink_state = !global_blink_state;
             Event_Publish(EVENT_DISPLAY_BLINK, global_blink_state, SYS_MODE_TIME_SET);
         }
-    }
-}
+    

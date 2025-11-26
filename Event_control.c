@@ -16,13 +16,14 @@ static unsigned char queue_head = 0, queue_tail = 0;
 static SystemMode current_mode = SYS_MODE_CLOCK;
 
 // 发布事件
-void Event_Publish(EventType type, int dat, SystemMode mode) {
+void Event_Publish(EventType type, int dat, SystemMode mode) reentrant{
+    unsigned char ea_save = EA; 
 	EA =0; //中断保护数据
     event_queue[queue_tail].type = type;
     event_queue[queue_tail].dat = dat;
     event_queue[queue_tail].mode = mode;
     queue_tail = (queue_tail + 1) % MAX_EVENTS;
-	EA =1;	  //中断释放
+ 	EA = ea_save; 
 }
 
 // 处理事件
