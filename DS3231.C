@@ -70,7 +70,7 @@ void DS3231_ReadTime(void) {
     I2C_SendAck(0); // 发送ACK
     
     // 读时 (NACK - 最后一个字节发非应答)
-    ds_hour = BCD_To_Decimal(I2C_ReceiveByte());
+    ds_hour = BCD_To_Decimal(I2C_ReceiveByte()& 0x3F); //屏蔽掉 Bit6 的 12/24H 标志位
     I2C_SendAck(1); // 发送NACK，告诉从机读完了
     
     I2C_Stop();

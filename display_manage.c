@@ -41,7 +41,7 @@ static void Display_Blink_Control(TimeSubMode sub_mode,
     if(blink_state) {
         LCD_ShowString(1, 1, display_text);
     } else {
-        char blink_display[17];
+       static xdata char blink_display[17];
         sprintf(blink_display, "%s", display_text);
         
         if(sub_mode == TIME_SUBMODE_SELECT_UNIT) {

@@ -1,8 +1,7 @@
 #ifndef __BUZZER_H__
 #define __BUZZER_H__
 
-// 蜂鸣器引脚定义 - 根据原理图，BZ连接到P3.7
-sbit BUZZER = P3^7;
+
 
 // 蜂鸣器工作模式
 typedef enum {

@@ -2,6 +2,8 @@
 #include "event.h"
 #include "delay.h"
 
+static bit key_pressed_flag = 0;
+
 // 键值映射表
 code const unsigned char key_function_map[16] = {
     '7', '8', '9', KEY_MODE,  // 第一行: 极速模式7, 8, 9, 模式
@@ -25,6 +27,9 @@ unsigned char Key_Scan(void)
         Delay(10); // 消抖
         
         if ((P1 & 0x0F) != 0x0F) {
+
+		if(key_pressed_flag == 1)
+		{ return 0xFF; 	}//避免长按卡死
             // 逐行扫描
             for (row = 0; row < 4; row++) {
                 P1 = ((~(1 << row)) << 4) | 0x0F;
@@ -36,9 +41,7 @@ unsigned char Key_Scan(void)
                             key_value = row * 4 + col;
                             
                             // 等待按键释放
-                            while ((P1 & 0x0F) != 0x0F) {
-                                Delay(1);
-                            }
+                               key_pressed_flag = 1;
                             return key_value;
                         }
                     }
@@ -46,7 +49,11 @@ unsigned char Key_Scan(void)
             }
         }
     }
-    return key_value;
+     else {
+        //检测到没有按键按下，重置标志位，允许下一次触发
+        key_pressed_flag = 0;
+    }
+    return 0xFF;
 }
 
 // 获取按键功能（保持不变）

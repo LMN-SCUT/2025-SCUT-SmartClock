@@ -16,7 +16,7 @@
 
 void main() {
     // 傻逼C89标准
-    static unsigned int timer_10ms_count = 0;
+	static unsigned long last_blink_time = 0;  //闪烁计时
     
     // 初始化所有模块
     Display_Init();	 //初始化显示屏
@@ -55,9 +55,9 @@ void main() {
 		Alarm_Loop_Update();
         
         // 闪烁更新
-        timer_10ms_count++;
-        if(timer_10ms_count >= 50) { // 50 * 10ms = 500ms
-            timer_10ms_count = 0;
+        if (Timer_GetMilliseconds() - last_blink_time >= 500) { // 精确的500ms
+            last_blink_time = Timer_GetMilliseconds();
+            
             if(Event_GetCurrentMode() == SYS_MODE_TIME_SET) {
                 Time_Blink_Update();
             }
@@ -65,8 +65,6 @@ void main() {
                 Alarm_Blink_Update();
             }
         }
-        }
         
-        // 短暂延时，减少CPU占用
-       // Delay(10); （看看卡不卡，不卡就这样）
     }
+}

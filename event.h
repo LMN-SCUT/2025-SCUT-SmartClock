@@ -67,7 +67,7 @@ typedef struct {
 } Event;
 
 // 函数声明
-void Event_Publish(EventType type, int dat, SystemMode mode)reentrant;	 //reetrant关键字保证Event_Publish这个关键函数具有重入性
+void Event_Publish(EventType type, int dat, SystemMode mode);	
 void Event_Process(void);
 SystemMode Event_GetCurrentMode(void);
 
