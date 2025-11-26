@@ -19,10 +19,14 @@ static SystemMode current_mode = SYS_MODE_CLOCK;
 void Event_Publish(EventType type, int dat, SystemMode mode) reentrant{
     unsigned char ea_save = EA; 
 	EA =0; //中断保护数据
+	if ((queue_tail + 1) % MAX_EVENTS != queue_head){
     event_queue[queue_tail].type = type;
     event_queue[queue_tail].dat = dat;
     event_queue[queue_tail].mode = mode;
-    queue_tail = (queue_tail + 1) % MAX_EVENTS;
+    queue_tail = (queue_tail + 1) % MAX_EVENTS;	
+	}
+	else
+	{}
  	EA = ea_save; 
 }
 
