@@ -13,5 +13,6 @@ void I2C_SendByte(unsigned char Byte);
 unsigned char I2C_ReceiveByte(void);
 void I2C_SendAck(bit AckBit);
 bit I2C_ReceiveAck(void);
+void I2C_Bus_Recovery(void);
 
 #endif

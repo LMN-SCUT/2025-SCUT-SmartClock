@@ -24,6 +24,14 @@ void I2C_Delay(void)
 // I2C 初始化
 void I2C_Init(void)
 {
+    // 1. 先把引脚设为高（释放总线）
+    I2C_SCL = 1;
+    I2C_SDA = 1;
+    
+    // 2. 执行总线恢复/解锁检测
+    I2C_Bus_Recovery();
+    
+    // 3. 再次确保释放
     I2C_SCL = 1;
     I2C_SDA = 1;
 }
@@ -108,4 +116,23 @@ bit I2C_ReceiveAck(void)
     I2C_SCL = 0;
     I2C_Delay();
     return AckBit;
+}
+// I2C 总线解锁/恢复函数
+void I2C_Bus_Recovery(void) {
+    unsigned char i;
+    
+    // 如果发现 SDA 是一上电就是低电平（说明被从机拉死了）
+    if (I2C_SDA == 0) {
+        // 尝试发送 9 个时钟脉冲，把从机里的数据“挤”出来
+        for (i = 0; i < 9; i++) {
+            I2C_SCL = 0; 
+            I2C_Delay();
+            I2C_SCL = 1; // 产生一个上升沿，骗从机走一位
+            I2C_Delay();
+        }
+        
+        // 发送一个 STOP 信号，彻底复位总线
+        I2C_Start(); // 这里虽然SDA可能还是低，但试着造一个停止条件
+        I2C_Stop();
+    }
 }

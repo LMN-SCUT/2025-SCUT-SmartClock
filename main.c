@@ -36,20 +36,10 @@ void main() {
 	WDT_Init(); 			//看门狗开始
 	
 
-    // 简单的判断：如果读取到的时间全是0（可能是新电池），则设个默认值
-    if(ds_hour == 0 && ds_min == 0 && ds_sec == 0) {
-        // 第一次运行，设置一个初始值，比如 12:00:00
-        DS3231_SetTime(12, 0, 0);
-        // 更新到系统事件，让屏幕显示
-        Event_Publish(EVENT_TIME_HOUR_UPDATED, 12, SYS_MODE_CLOCK);
-        Event_Publish(EVENT_TIME_MINUTE_UPDATED, 0, SYS_MODE_CLOCK);
-        Event_Publish(EVENT_TIME_SECOND_UPDATED, 0, SYS_MODE_CLOCK);
-    } else {
-        // 不是第一次，将读到的硬件时间同步给系统
         Event_Publish(EVENT_TIME_HOUR_UPDATED, ds_hour, SYS_MODE_CLOCK);
         Event_Publish(EVENT_TIME_MINUTE_UPDATED, ds_min, SYS_MODE_CLOCK);
         Event_Publish(EVENT_TIME_SECOND_UPDATED, ds_sec, SYS_MODE_CLOCK);
-    }
+    
     
     while(1) {
         // 处理键盘事件
