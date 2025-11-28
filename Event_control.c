@@ -9,8 +9,8 @@
 #include "stopwatch_manage.h"
 
 #define MAX_EVENTS 10
-static Event event_queue[MAX_EVENTS];
-static unsigned char queue_head = 0, queue_tail = 0;
+static xdata Event event_queue[MAX_EVENTS];
+static xdata unsigned char queue_head = 0, queue_tail = 0;
 
 // 全局系统模式
 static SystemMode current_mode = SYS_MODE_CLOCK;

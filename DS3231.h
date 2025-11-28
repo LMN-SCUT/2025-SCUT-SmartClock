@@ -8,8 +8,8 @@ void DS3231_SetTime(unsigned char h, unsigned char m, unsigned char s);
 
 // 这些变量存储从DS3231读回来的最新时间
 // 既然是全局调用，我们用 extern 暴露出去
-extern unsigned char ds_hour;
-extern unsigned char ds_min;
-extern unsigned char ds_sec;
+extern xdata unsigned char ds_hour;
+extern xdata unsigned char ds_min;
+extern xdata unsigned char ds_sec;
 
 #endif

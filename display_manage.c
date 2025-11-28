@@ -10,8 +10,8 @@
 #include <stdio.h>
 
 // ÏÔÊ¾»º³å
-static char time_display[17] = "Time: 00:00:00";
-static char alarm_display[17] = "Alarm:00:00:00";
+static xdata char time_display[17] = "Time: 00:00:00";
+static xdata char alarm_display[17] = "Alarm:00:00:00";
 
 // ÄÖÖÓÏìÁå×´Ì¬
 static bit alarm_ringing = 0;

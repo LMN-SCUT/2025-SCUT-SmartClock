@@ -6,9 +6,9 @@
 #define DS3231_ADDRESS_READ  0xD1
 
 // 全局变量定义
-unsigned char ds_hour = 12;
-unsigned char ds_min = 0;
-unsigned char ds_sec = 0;
+xdata unsigned char ds_hour = 12;
+xdata unsigned char ds_min = 0;
+xdata unsigned char ds_sec = 0;
 
 // BCD转十进制 (例如: 0x12 -> 12)
 unsigned char BCD_To_Decimal(unsigned char bcd) {
