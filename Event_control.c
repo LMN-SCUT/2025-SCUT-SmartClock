@@ -8,7 +8,7 @@
 #include "menu_manage.h"  
 #include "stopwatch_manage.h"
 
-#define MAX_EVENTS 10
+#define MAX_EVENTS 30
 static xdata Event event_queue[MAX_EVENTS];
 static xdata unsigned char queue_head = 0, queue_tail = 0;
 
@@ -53,16 +53,18 @@ void Event_Process(void) {
         }
         
         // 分发事件到各模块
+		Number_Input_Manage(&e);   //数字输入管理
         Display_manage(&e);	   //显示模块
         Time_Manage(&e);        //走时管理
         Alarm_Manage(&e);		//闹钟管理
-        Number_Input_Manage(&e);   //数字输入管理
+        
         Menu_Manage(&e);        // 菜单管理模块
 		Stopwatch_Manage(&e); // 秒表管理
         
         // 模式切换后的初始化处理
         if (e.type == EVENT_SYS_MODE_CHANGE) {
             if (e.dat == SYS_MODE_NUMBER_INPUT) {
+			    current_mode = e.dat;
                 Number_Input_Reset();  // 进入数字输入模式时重置
             }
             if (e.dat == SYS_MODE_MENU) {

@@ -14,28 +14,28 @@ typedef enum {
 // 统一的事件类型定义
 typedef enum {
     // 系统控制事件
-    EVENT_NONE,                // 无事件
-    EVENT_SYS_MODE_CHANGE,     // 系统模式切换
-    EVENT_SYS_SETTING_CHANGE,  // 系统设置状态变化
-    
+    EVENT_NONE,                // 无事件				   1
+    EVENT_SYS_MODE_CHANGE,     // 系统模式切换				2
+    EVENT_SYS_SETTING_CHANGE,  // 系统设置状态变化			 3
+    														  
     // 时间相关事件
-    EVENT_TIME_TIMER_1S,       // 1秒定时事件
-    EVENT_TIME_SECOND_UPDATED, // 秒已更新
-    EVENT_TIME_MINUTE_UPDATED, // 分已更新
-    EVENT_TIME_HOUR_UPDATED,   // 时已更新
+    EVENT_TIME_TIMER_1S,       // 1秒定时事件				  4
+    EVENT_TIME_SECOND_UPDATED, // 秒已更新					   5
+    EVENT_TIME_MINUTE_UPDATED, // 分已更新						6
+    EVENT_TIME_HOUR_UPDATED,   // 时已更新						 7
     
     // 闹钟相关事件
-    EVENT_ALARM_SECOND_UPDATED, // 闹钟秒更新
-    EVENT_ALARM_MINUTE_UPDATED, // 闹钟分更新
-    EVENT_ALARM_HOUR_UPDATED,   // 闹钟时更新
-    EVENT_ALARM_TRIGGERED,      // 闹钟触发
-	EVENT_ALARM_START,			//闹钟响铃
-	EVENT_ALARM_STOP,			//闹钟关闭
-	EVENT_ALARM_SNOOZE,		    //贪睡
+    EVENT_ALARM_SECOND_UPDATED, // 闹钟秒更新					  8
+    EVENT_ALARM_MINUTE_UPDATED, // 闹钟分更新					   9
+    EVENT_ALARM_HOUR_UPDATED,   // 闹钟时更新						10
+    EVENT_ALARM_TRIGGERED,      // 闹钟触发							  11
+	EVENT_ALARM_START,			//闹钟响铃								12
+	EVENT_ALARM_STOP,			//闹钟关闭								  13
+									
 
     
     // 键盘输入事件
-    EVENT_KEY_NUMBER,          // 数字键0-9
+    EVENT_KEY_NUMBER,          // 数字键0-9									  14
     EVENT_KEY_MODE,            // 模式键
     EVENT_KEY_SET,             // 设置键
     EVENT_KEY_INCREMENT,       // 增加键

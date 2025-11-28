@@ -2,6 +2,10 @@
 #include "number_input.h"
 #include "event.h"
 #include "DS3231.h"
+#include "Buzzer.h"
+#include "delay.h"
+#include <stdio.h>
+#include "LCD1602.h"
 
 // 数字输入缓冲区（存储6位数字：HHMMSS）
 static xdata unsigned char input_buffer[6] = {0};
@@ -33,12 +37,21 @@ unsigned char Number_Input_GetCount(void) {
 }
 
 void Number_Input_Manage(Event* e) {
+/*if (e->type != EVENT_NONE && e->type != EVENT_TIME_SECOND_UPDATED) { // 屏蔽掉每秒那种刷屏的事件(测试代码，记得删）
+        
+        // 在屏幕第二行显示：Type=XX, Dat=XX
+        char debug_str[17];
+        sprintf(debug_str, "T:%d D:%d M:%d", (int)e->type, (int)e->dat, (int)e->mode);
+        LCD_ShowString(2, 1, debug_str);
+    }
+	 */
     if (Event_GetCurrentMode() != SYS_MODE_NUMBER_INPUT) {
         return;
     }
     
     switch(e->type) {
         case EVENT_KEY_NUMBER:
+			 
             if (input_state == INPUT_ACTIVE && input_count < 6) {
                 input_buffer[input_count] = e->dat;
                 input_count++;

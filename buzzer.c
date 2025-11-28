@@ -8,7 +8,7 @@ static unsigned int beep_counter = 0;
 static unsigned char beep_state = 0;
 
 // 蜂鸣器引脚定义 - 根据原理图，BZ连接到P3.7
-sbit BUZZER = P3^7;
+
 
 // 蜂鸣器初始化
 void Buzzer_Init(void) {
@@ -55,3 +55,8 @@ void Buzzer_Update(void) {
             break;
     }
 }
+void Buzzer_Test(void){
+BUZZER=!BUZZER; 
+Delay(1000);
+BUZZER=!BUZZER;  //测试代码，记得删
+			}
