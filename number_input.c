@@ -16,7 +16,8 @@ void Number_Input_Reset(void) {
     unsigned char i;  // 将变量声明提到函数开头
     
     input_count = 0;
-    input_state = INPUT_IDLE;
+     input_state = INPUT_ACTIVE; 
+ 
     
     for(i = 0; i < 6; i++) {  // 在循环外声明i，这里直接使用
         input_buffer[i] = 0;
