@@ -18,8 +18,7 @@
  * @return 返回按键的原始键值（0-15对应4x4矩阵位置）
  * @note 该函数会进行按键消抖处理
  */
-unsigned char Key_Scan(void);
-unsigned char Key_GetFunction(void);
+
 void Key_ProcessEvents(void);
 
 #endif
