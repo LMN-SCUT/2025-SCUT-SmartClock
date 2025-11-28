@@ -64,7 +64,7 @@ void main() {
             
              ALARM_LED = !ALARM_LED; 
              
-             // 顺便让屏幕也跟着闪（全屏闪烁事件）
+             // 全屏闪烁事件
              Event_Publish(EVENT_DISPLAY_FLSAH, ALARM_LED, SYS_MODE_CLOCK);
         }
         }
