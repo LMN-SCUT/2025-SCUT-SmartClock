@@ -14,7 +14,7 @@ static xdata unsigned char alarm_seconds = 0;
 
 static xdata AlarmState alarm_state = ALARM_OFF;
 static xdata unsigned char alarm_blink_counter = 0;
-static  bit alarm_blink_state = 0;
+static idata bit alarm_blink_state = 0;
 
 // 闹钟设置状态（与时间设置类似）
 static xdata TimeSubMode alarm_set_mode = TIME_SUBMODE_NORMAL;
