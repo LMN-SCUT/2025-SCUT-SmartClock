@@ -12,7 +12,7 @@ sbit BUZZER = P3^7;
 
 // ·äÃùÆ÷³õÊ¼»¯
 void Buzzer_Init(void) {
-    BUZZER = 0;  // ³õÊ¼×´Ì¬¹Ø±Õ
+    BUZZER = 1;  // ³õÊ¼×´Ì¬¹Ø±Õ
     current_mode = BUZZER_OFF;
 }
 
@@ -27,11 +27,11 @@ void Buzzer_SetMode(BuzzerMode mode) {
 void Buzzer_Update(void) {
     switch(current_mode) {
         case BUZZER_OFF:
-            BUZZER = 0;
+            BUZZER = 1;
             break;
             
         case BUZZER_ON:
-            BUZZER = 1;  // ³ÖĞøÃù½Ğ
+            BUZZER = 0;  // ³ÖĞøÃù½Ğ
             break;
             
         case BUZZER_BEEP:
@@ -40,7 +40,7 @@ void Buzzer_Update(void) {
             if(beep_counter >= 50) {  // 50 * 10ms = 500ms
                 beep_counter = 0;
                 beep_state = !beep_state;
-                BUZZER = beep_state;  // ÇĞ»»×´Ì¬
+                BUZZER = !beep_state;  // ÇĞ»»×´Ì¬
             }
             break;
             
@@ -50,7 +50,7 @@ void Buzzer_Update(void) {
             if(beep_counter >= 20) {  // 20 * 10ms = 200ms
                 beep_counter = 0;
                 beep_state = !beep_state;
-                BUZZER = beep_state;
+                BUZZER = !beep_state;
             }
             break;
     }

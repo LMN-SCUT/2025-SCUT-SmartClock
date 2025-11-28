@@ -17,7 +17,7 @@ sbit I2C_SDA = P3^5;
 // I2C 标准速率需要 5us 左右的保持时间
 void I2C_Delay(void)
 {
-    unsigned char i = 2; // 循环大概消耗 2*4 + 2 = 10us 左右
+    unsigned char i = 10; // 循环大概消耗 2*4 + 2 = 10us 左右
     while(i--);
 }
 

@@ -13,19 +13,26 @@
 #include "AT24C32.H"
 #include  "number_input.h"
 #include  "stopwatch_manage.h"
-#include "watch_dog.h"
+//#include "watch_dog.h"
 
 sbit ALARM_LED = P2^4;//定义LED灯地址
 
 unsigned char blink_interval = 500;
 
+void Delay500ms(void);
+
+
+
 void main() {
     // 傻逼C89标准
 	static unsigned long last_blink_time = 0;  //闪烁计时
+	ALARM_LED = 1;
     
     // 初始化所有模块
     Display_Init();	 //初始化显示屏
     Timer2_Init();   //初始化计时器
+	Delay500ms();
+	Delay500ms();
 	Buzzer_Init();	 //初始化蜂鸣器
 	I2C_Init();      // 初始化I2C总线
     DS3231_Init();   // 初始化DS3231
@@ -33,7 +40,7 @@ void main() {
 	DS3231_ReadTime();		//把数值传到时间管理
 	Number_Input_Init();	//数字输入系统重置
     Stopwatch_Init();		//秒表重置
-	WDT_Init(); 			//看门狗开始
+//	WDT_Init(); 			//看门狗开始
 	
 
         Event_Publish(EVENT_TIME_HOUR_UPDATED, ds_hour, SYS_MODE_CLOCK);
@@ -48,7 +55,7 @@ void main() {
         // 处理系统事件
         Event_Process();
 		Buzzer_Update();
-		WDT_Feed();          //喂狗 
+//		WDT_Feed();          //喂狗 
         
         // 闪烁更新
         if (Timer_GetMilliseconds() - last_blink_time >= blink_interval) { // 精确的500ms
@@ -70,4 +77,19 @@ void main() {
         }
         
     }
+}
+
+void Delay500ms()		//@12.000MHz
+{
+	unsigned char i, j, k;
+	i = 4;
+	j = 205;
+	k = 187;
+	do
+	{
+		do
+		{
+			while (--k);
+		} while (--j);
+	} while (--i);
 }
