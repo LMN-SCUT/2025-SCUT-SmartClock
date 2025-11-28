@@ -87,7 +87,7 @@ void Display_manage(Event* e) {
         case EVENT_TIME_HOUR_UPDATED:
             // 更新时间显示
             sprintf(time_display, "Time: %02d:%02d:%02d", 
-                   Time_GetHour(), Time_GetMin(), Time_GetSec());
+                   (int)Time_GetHour(), (int)Time_GetMin(), (int)Time_GetSec());
             
             if(!alarm_ringing || sys_mode == SYS_MODE_TIME_SET) {
                 if(sys_mode == SYS_MODE_CLOCK || sys_mode == SYS_MODE_TIME_SET) {
