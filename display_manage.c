@@ -176,6 +176,8 @@ void Display_manage(Event* e) {
             
             switch(e->dat) {
                 case SYS_MODE_CLOCK:
+				 sprintf(time_display, "Time: %02d:%02d:%02d", 
+                   (int)Time_GetHour(), (int)Time_GetMin(), (int)Time_GetSec());
                     LCD_ShowString(1, 1, time_display);
                     LCD_ShowString(2, 1, "                ");
                     break;

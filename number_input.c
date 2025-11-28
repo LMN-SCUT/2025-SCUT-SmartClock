@@ -82,6 +82,7 @@ void Number_Input_Manage(Event* e) {
                     Event_Publish(EVENT_TIME_HOUR_UPDATED, hours, SYS_MODE_CLOCK);
                     Event_Publish(EVENT_TIME_MINUTE_UPDATED, minutes, SYS_MODE_CLOCK);
                     Event_Publish(EVENT_TIME_SECOND_UPDATED, seconds, SYS_MODE_CLOCK);
+					Event_Publish(EVENT_DISPLAY_UPDATE, 0, SYS_MODE_CLOCK);//LCD刷新
                     
                     // 返回时钟模式
                     Event_Publish(EVENT_SYS_MODE_CHANGE, SYS_MODE_CLOCK, SYS_MODE_NUMBER_INPUT);

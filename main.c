@@ -56,6 +56,9 @@ void main() {
         Event_Process();
 		Buzzer_Update();
 //		WDT_Feed();          //喂狗 
+		if (Timer_GetMilliseconds() % 1000 == 0) { // 每秒强制刷
+    Event_Publish(EVENT_DISPLAY_UPDATE, 0, SYS_MODE_CLOCK);
+}
         
         // 闪烁更新
         if (Timer_GetMilliseconds() - last_blink_time >= blink_interval) { // 精确的500ms
@@ -92,4 +95,14 @@ void Delay500ms()		//@12.000MHz
 			while (--k);
 		} while (--j);
 	} while (--i);
-}
+}   
+
+/*目前的BUG
+1.时间增减模式INC与ENC键无效
+2.秒表的计时逻辑貌似有问题，计时到60秒时会突变为256，然后走到261，然后归零
+3.秒表的显示逻辑不太正常
+4.闹钟模式的初值错误，INC与ENC无效
+5.显示数字底部有误，可能需要强制占位
+
+
+
