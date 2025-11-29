@@ -151,7 +151,6 @@ void Display_manage(Event* e) {
             
         case EVENT_KEY_ENTER:
             if(alarm_ringing) {
-                
                 sprintf(time_display, "Time: %02d:%02d:%02d", 
                        Time_GetHour(), Time_GetMin(), Time_GetSec());
                 LCD_ShowString(1, 1, time_display);
