@@ -129,7 +129,7 @@ void Display_manage(Event* e) {
                 unsigned char milliseconds = (total_ms % 1000) / 10;
                 
                 char stopwatch_display[17];
-                sprintf(stopwatch_display, "%02d:%02d.%02d", minutes, seconds, milliseconds);
+                sprintf(stopwatch_display, "%02d:%02d.%02d", (int)minutes, (int)seconds, (int)milliseconds);
                 LCD_ShowString(2, 1, stopwatch_display);
             }
             break;
