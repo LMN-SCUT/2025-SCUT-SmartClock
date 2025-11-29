@@ -145,16 +145,12 @@ void Display_manage(Event* e) {
             break;
             
         case EVENT_ALARM_TRIGGERED:
-            alarm_ringing = 1;
-            Buzzer_SetMode(BUZZER_ALARM);
             LCD_ShowString(1, 1, "ALARM ACTIVATED ");
             LCD_ShowString(2, 1, "Press ENT to stop");
             break;
             
         case EVENT_KEY_ENTER:
             if(alarm_ringing) {
-                alarm_ringing = 0;
-                Buzzer_SetMode(BUZZER_OFF);
                 
                 sprintf(time_display, "Time: %02d:%02d:%02d", 
                        Time_GetHour(), Time_GetMin(), Time_GetSec());

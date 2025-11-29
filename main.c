@@ -13,6 +13,7 @@
 #include "AT24C32.H"
 #include  "number_input.h"
 #include  "stopwatch_manage.h"
+#include <stdio.h>
 //#include "watch_dog.h"
 
 sbit ALARM_LED = P2^4;//定义LED灯地址
@@ -20,6 +21,8 @@ sbit ALARM_LED = P2^4;//定义LED灯地址
 unsigned char blink_interval = 500;
 
 void Delay500ms(void);
+
+char debug_str[17];
 
 
 
@@ -63,24 +66,27 @@ void main() {
         // 闪烁更新
         if (Timer_GetMilliseconds() - last_blink_time >= blink_interval) { // 精确的500ms
             last_blink_time = Timer_GetMilliseconds();
+		
+
+    if (Get_Alarm_State() == ALARM_RINGING) {
+        ALARM_LED = !ALARM_LED;
+        // ...
+    } else {
+        ALARM_LED = 1;
+    }
             
             if(Event_GetCurrentMode() == SYS_MODE_TIME_SET) {
                 Time_Blink_Update();
             }
             if(Event_GetCurrentMode() == SYS_MODE_ALARM_SET) {
                 Alarm_Blink_Update();
-            }
-			 if (Alarm_IsRinging()) {
             
-             ALARM_LED = !ALARM_LED; 
+			
              
              // 全屏闪烁事件
              Event_Publish(EVENT_DISPLAY_FLSAH, ALARM_LED, SYS_MODE_CLOCK);
         }
-		else {
-			ALARM_LED = 1;
-			}
-
+		
         }
         
     }

@@ -22,6 +22,8 @@ typedef enum {
     ALARM_RINGING    // ÄÖÖÓÏìÁåÖĞ
 } AlarmState;
 
+
+
 // º¯ÊıÉùÃ÷
 void Alarm_Manage(Event* e);
 void Alarm_Blink_Update(void); 
@@ -32,5 +34,6 @@ unsigned char Alarm_GetSec(void);
 void Alarm_Read_From_EEPROM(void);
 bit Alarm_IsRinging(void);
 TimeUnit Alarm_GetSelectedUnit(void);
+AlarmState Get_Alarm_State(void);
 
 #endif
