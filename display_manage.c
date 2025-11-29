@@ -86,7 +86,7 @@ void Display_manage(Event* e) {
         case EVENT_TIME_MINUTE_UPDATED:
         case EVENT_TIME_HOUR_UPDATED:
             // 更新时间显示
-            sprintf(time_display, "Time: %02d:%02d:%02d", 
+            sprintf(time_display, "Time: %02d:%02d:%02d  ", 
                    (int)Time_GetHour(), (int)Time_GetMin(), (int)Time_GetSec());
             
             if(!alarm_ringing || sys_mode == SYS_MODE_TIME_SET) {
@@ -99,8 +99,8 @@ void Display_manage(Event* e) {
         case EVENT_ALARM_SECOND_UPDATED:
         case EVENT_ALARM_MINUTE_UPDATED:
         case EVENT_ALARM_HOUR_UPDATED:
-            sprintf(alarm_display, "Alarm:%02d:%02d:%02d", 
-                   Alarm_GetHour(), Alarm_GetMin(), Alarm_GetSec());
+            sprintf(alarm_display, "Alarm:%02d:%02d:%02d  ", 
+                 (int)Alarm_GetHour(), (int)Alarm_GetMin(), (int)Alarm_GetSec());
             if(sys_mode == SYS_MODE_ALARM_SET) {
                 LCD_ShowString(1, 1, alarm_display);
             }
@@ -129,7 +129,7 @@ void Display_manage(Event* e) {
                 unsigned char milliseconds = (total_ms % 1000) / 10;
                 
                 char stopwatch_display[17];
-                sprintf(stopwatch_display, "%02d:%02d.%02d", (int)minutes, (int)seconds, (int)milliseconds);
+                sprintf(stopwatch_display, "%02d:%02d.%02d       ", (int)minutes, (int)seconds, (int)milliseconds);
                 LCD_ShowString(2, 1, stopwatch_display);
             }
             break;
@@ -176,7 +176,7 @@ void Display_manage(Event* e) {
             
             switch(e->dat) {
                 case SYS_MODE_CLOCK:
-				 sprintf(time_display, "Time: %02d:%02d:%02d", 
+				 sprintf(time_display, "Time: %02d:%02d:%02d  ", 
                    (int)Time_GetHour(), (int)Time_GetMin(), (int)Time_GetSec());
                     LCD_ShowString(1, 1, time_display);
                     LCD_ShowString(2, 1, "                ");
@@ -188,7 +188,7 @@ void Display_manage(Event* e) {
                     break;
                     
                 case SYS_MODE_ALARM_SET:
-                    sprintf(alarm_display, "Alarm:%02d:%02d:%02d", 
+                    sprintf(alarm_display, "Alarm:%02d:%02d:%02d ", 
                            Alarm_GetHour(), Alarm_GetMin(), Alarm_GetSec());
                     LCD_ShowString(1, 1, alarm_display);
                     LCD_ShowString(2, 1, "Set Alarm      ");
