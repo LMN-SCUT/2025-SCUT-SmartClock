@@ -31,5 +31,6 @@ unsigned char Alarm_GetMin(void);
 unsigned char Alarm_GetSec(void);
 void Alarm_Read_From_EEPROM(void);
 bit Alarm_IsRinging(void);
+TimeUnit Alarm_GetSelectedUnit(void);
 
 #endif

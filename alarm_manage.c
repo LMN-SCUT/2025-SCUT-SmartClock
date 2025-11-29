@@ -4,6 +4,7 @@
 #include "display_manage.h"
 #include "buzzer.h"  
 #include "AT24C32.h" 
+#include "timer_manage.h"
 
 
 
@@ -224,4 +225,6 @@ alarm_blink_state = !alarm_blink_state;
 // 发布闪烁事件，通知 Display 模块刷新屏幕
 Event_Publish(EVENT_DISPLAY_BLINK, alarm_blink_state, SYS_MODE_ALARM_SET);
         }
+TimeUnit Alarm_GetSelectedUnit(void) { 
+return alarm_selected_unit; }
 

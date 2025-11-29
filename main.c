@@ -77,6 +77,10 @@ void main() {
              // х╚фаиак╦йб╪Ч
              Event_Publish(EVENT_DISPLAY_FLSAH, ALARM_LED, SYS_MODE_CLOCK);
         }
+		else {
+			ALARM_LED = 1;
+			}
+
         }
         
     }

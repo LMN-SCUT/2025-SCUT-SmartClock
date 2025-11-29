@@ -138,8 +138,8 @@ void Display_manage(Event* e) {
                 Display_Blink_Control(sub_mode, selected, e->dat, time_display);
             } 
             else if(sys_mode == SYS_MODE_ALARM_SET) {
-                TimeSubMode sub_mode = Time_GetCurrentSubMode();
-                TimeUnit selected = Time_GetSelectedUnit();
+                TimeSubMode sub_mode = Alarm_GetSelectedUnit();
+                TimeUnit selected = Alarm_GetSelectedUnit();
                 Display_Blink_Control(sub_mode, selected, e->dat, alarm_display);
             }
             break;
