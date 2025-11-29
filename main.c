@@ -14,7 +14,7 @@
 #include  "number_input.h"
 #include  "stopwatch_manage.h"
 #include <stdio.h>
-//#include "watch_dog.h"
+#include "watch_dog.h"
 
 sbit ALARM_LED = P2^4;//定义LED灯地址
 
@@ -43,7 +43,7 @@ void main() {
 	DS3231_ReadTime();		//把数值传到时间管理
 	Number_Input_Init();	//数字输入系统重置
     Stopwatch_Init();		//秒表重置
-//	WDT_Init(); 			//看门狗开始
+	WDT_Init(); 			//看门狗开始
 	
 
         Event_Publish(EVENT_TIME_HOUR_UPDATED, ds_hour, SYS_MODE_CLOCK);
@@ -58,7 +58,7 @@ void main() {
         // 处理系统事件
         Event_Process();
 		Buzzer_Update();
-//		WDT_Feed();          //喂狗 
+		WDT_Feed();          //喂狗 
 		if (Timer_GetMilliseconds() % 1000 == 0) { // 每秒强制刷
     Event_Publish(EVENT_DISPLAY_UPDATE, 0, SYS_MODE_CLOCK);
 }

@@ -55,8 +55,8 @@ void Buzzer_Update(void) {
             break;
     }
 }
-void Buzzer_Test(void){
+/*void Buzzer_Test(void){
 BUZZER=!BUZZER; 
 Delay(1000);
 BUZZER=!BUZZER;  //≤‚ ‘¥˙¬Î£¨º«µ√…æ
-			}
+			}	  */
