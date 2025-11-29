@@ -84,6 +84,25 @@ void Alarm_Manage(Event* e) {
     if (e->type == EVENT_TIME_SECOND_UPDATED) {
         Check_Alarm_Trigger(Time_GetHour(), Time_GetMin(), Time_GetSec());
     }
+
+if (e->type == EVENT_SYS_MODE_CHANGE) {
+        if (e->dat == SYS_MODE_ALARM_SET) {
+            
+            // 1. 强制进入“选单位”模式
+            alarm_set_mode = TIME_SUBMODE_SELECT_UNIT; 
+            
+            // 2. 默认选中“小时”
+            alarm_selected_unit = UNIT_HOUR;
+            
+            // 3. 刷新显示（让光标闪起来）
+            Event_Publish(EVENT_DISPLAY_UPDATE, 0, SYS_MODE_ALARM_SET);
+        }
+        return; // 处理完切换就可以走了
+    }
+
+    // ... 拦截非当前模式 ...
+    if (Event_GetCurrentMode() != SYS_MODE_ALARM_SET) return;
+
     
     // 处理闹钟响铃时的按键事件
     if (alarm_ringing) {

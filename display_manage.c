@@ -38,43 +38,40 @@ static void Display_Full_Flash(unsigned char state) {
 static void Display_Blink_Control(TimeSubMode sub_mode, 
                                   TimeUnit selected, unsigned char blink_state,
                                   char* display_text) {
+	   static xdata char blink_display[17];
+    
+    // 1. 如果是亮的状态，直接显示原文本
     if(blink_state) {
         LCD_ShowString(1, 1, display_text);
-    } else {
-       static xdata char blink_display[17];
-        sprintf(blink_display, "%s", display_text);
-        
-        if(sub_mode == TIME_SUBMODE_SELECT_UNIT) {
-            if(selected != UNIT_HOUR) {
-                blink_display[6] = ' ';
-                blink_display[7] = ' ';
-            }
-            if(selected != UNIT_MINUTE) {
-                blink_display[9] = ' ';
-                blink_display[10] = ' ';
-            }
-            if(selected != UNIT_SECOND) {
-                blink_display[12] = ' ';
-                blink_display[13] = ' ';
-            }
-        } else {
-            switch(selected) {
-                case UNIT_HOUR:
-                    blink_display[6] = ' ';
-                    blink_display[7] = ' ';
-                    break;
-                case UNIT_MINUTE:
-                    blink_display[9] = ' ';
-                    blink_display[10] = ' ';
-                    break;
-                case UNIT_SECOND:
-                    blink_display[12] = ' ';
-                    blink_display[13] = ' ';
-                    break;
-            }
-        }
-        LCD_ShowString(1, 1, blink_display);
+        return;
+    } 
+    
+    // 2. 如果是灭的状态，我们需要把“选中”的部分挖空
+ 
+    sprintf(blink_display, "%s", display_text);
+    
+    // 注意：这里的时间/闹钟格式必须是 "Time: HH:MM:SS  "
+    // HH start at 6, MM start at 9, SS start at 12
+    
+    switch(selected) {
+        case UNIT_HOUR:
+            blink_display[6] = ' ';
+            blink_display[7] = ' ';
+            break;
+            
+        case UNIT_MINUTE:
+            blink_display[9] = ' ';
+            blink_display[10] = ' ';
+            break;
+            
+        case UNIT_SECOND:
+            blink_display[12] = ' ';
+            blink_display[13] = ' ';
+            break;
     }
+    
+    // 显示挖空后的字符串
+    LCD_ShowString(1, 1, blink_display);
 }
 
 void Display_manage(Event* e) {
@@ -189,7 +186,7 @@ void Display_manage(Event* e) {
                     
                 case SYS_MODE_ALARM_SET:
                     sprintf(alarm_display, "Alarm:%02d:%02d:%02d ", 
-                           Alarm_GetHour(), Alarm_GetMin(), Alarm_GetSec());
+                         (int)Alarm_GetHour(), (int)Alarm_GetMin(), (int)Alarm_GetSec());
                     LCD_ShowString(1, 1, alarm_display);
                     LCD_ShowString(2, 1, "Set Alarm      ");
                     break;
