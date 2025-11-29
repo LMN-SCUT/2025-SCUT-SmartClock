@@ -123,10 +123,10 @@ void Display_manage(Event* e) {
                 LCD_ShowString(2, 1, input_display);
             } else if(sys_mode == SYS_MODE_STOPWATCH) {
                 // 秒表模式显示处理
-                unsigned int total_ms = Stopwatch_GetTimeMs();
+                unsigned long total_ms = Stopwatch_GetTimeMs();
                 unsigned char minutes = total_ms / 60000;
                 unsigned char seconds = (total_ms % 60000) / 1000;
-                unsigned char milliseconds = (total_ms % 1000) / 10;
+                unsigned int milliseconds = (total_ms % 1000) / 10;
                 
                 char stopwatch_display[17];
                 sprintf(stopwatch_display, "%02d:%02d.%02d       ", (int)minutes, (int)seconds, (int)milliseconds);

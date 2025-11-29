@@ -6,7 +6,7 @@
 // 秒表状态变量（保持不变）
 static StopwatchState sw_state = STOPWATCH_IDLE;
 static unsigned long total_ms = 0;
-static unsigned int last_update = 0;
+static unsigned long last_update = 0;
 
 void Stopwatch_Init(void) {
     sw_state = STOPWATCH_IDLE;
@@ -19,7 +19,7 @@ unsigned long Stopwatch_GetTimeMs(void) {
 }
 
 void Stopwatch_Manage(Event* e) {
-    unsigned int current_time;
+    unsigned long current_time;
     
     switch(e->type) {
         case EVENT_STOPWATCH_START:

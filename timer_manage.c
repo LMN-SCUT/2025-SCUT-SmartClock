@@ -98,6 +98,17 @@ void Time_Manage(Event* e) {
     if(e->type == EVENT_TIME_TIMER_1S) {
         Time_Tick();
     }
+
+
+	if (e->type == EVENT_SYS_MODE_CHANGE) {
+        if (e->dat == SYS_MODE_TIME_SET) {
+            current_time_submode = TIME_SUBMODE_SELECT_UNIT; // 强制进入选择模式
+            selected_unit = UNIT_HOUR; // 默认选小时
+            // 马上发个显示更新，让光标闪起来
+            Event_Publish(EVENT_DISPLAY_UPDATE, 0, SYS_MODE_TIME_SET);
+        }
+        return;
+    }
     
     // 根据当前系统模式处理其他事件
     switch(current_sys_mode) {
